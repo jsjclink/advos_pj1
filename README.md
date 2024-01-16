@@ -1,8 +1,8 @@
 # Project 1 - Thread scheduling with GTthreads
 
-**Release Date: Friday, Jan 18**
+**Release Date: Jan 18**
 
-**Due Date: Friday, Feb 11, 11:59 PM**
+**Due Date: Feb 11, 11:59 PM**
 
 ------
 
