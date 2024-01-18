@@ -51,8 +51,8 @@ E.g. ``$ ./bin/matrix -s 1 -lb`` this command means using credit scheduler with 
   - There are four different credit groups: **{25, 50, 75, 100}**. As a uthread runs, its credit is reduced by the used CPU cycles.
   - Please take a look at the following resources for more details of the credit scheduler:
     - [XenWiki for Credit Scheduler](http://wiki.xenproject.org/wiki/CreditScheduler)
-    - [The introduction slides of Xen Credit CPU Scheduler](http://www-archive.xenproject.org/files/summit_3/sched.pdf)
-    - [Comparison of the Three CPU Schedulers in Xen](http://www.xen.org/files/xensummit_4/3schedulers-xen-summit_Cherkosova.pdf)
+    - [The introduction slides of Xen Credit CPU Scheduler](https://web.archive.org/web/20211019034445/http://www-archive.xenproject.org/files/summit_3/sched.pdf)
+    - [Comparison of the Three CPU Schedulers in Xen](https://web.archive.org/web/20120714081759/http://www.xen.org/files/xensummit_4/3schedulers-xen-summit_Cherkosova.pdf)
   - To show the correctness, *students should print the queue of uthread credits*.
 
 
