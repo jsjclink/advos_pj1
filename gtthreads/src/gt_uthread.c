@@ -138,7 +138,7 @@ extern void uthread_schedule(uthread_struct_t * (*kthread_best_sched_uthread)(kt
 			long used_time = (end_time.tv_sec - u_obj->curr_start_time.tv_sec) * 1000000 + (end_time.tv_usec - u_obj->curr_start_time.tv_usec);
 			long used_time_ms = (used_time + 999) / 1000;
 
-			fprintf(stderr, "\nused_time_ms: %ld", used_time_ms);
+			// fprintf(stderr, "\nused_time_ms: %ld", used_time_ms);
 
 			u_obj->cpu_time += used_time_ms;
 			fprintf(stderr, "\nUThread(id:%d, group:%d, cpu:%d) finished. cpu_time: %ld, wait_time: %ld", 
@@ -171,14 +171,14 @@ extern void uthread_schedule(uthread_struct_t * (*kthread_best_sched_uthread)(kt
 			long used_credit = (used_time + 999) / 1000;
 
 			u_obj->cpu_time += used_credit;
-			fprintf(stderr, "\nused_time_ms: %ld", used_credit);
+			// fprintf(stderr, "\nused_time_ms: %ld", used_credit);
 
-			fprintf(stderr, "\nThread(id:%d, group:%d, cpu:%d) used_credit: %ld", u_obj->uthread_tid, u_obj->uthread_gid, u_obj->cpu_id, used_credit);
+			// fprintf(stderr, "\nThread(id:%d, group:%d, cpu:%d) used_credit: %ld", u_obj->uthread_tid, u_obj->uthread_gid, u_obj->cpu_id, used_credit);
 
 			u_obj->credit -= used_credit;
 			if(u_obj->credit < 0) {
-				fprintf(stderr, "\nThread(id:%d, group:%d, cpu:%d) priority changed. credit:%d",
-					u_obj->uthread_tid, u_obj->uthread_gid, u_obj->cpu_id, u_obj->credit);
+				// fprintf(stderr, "\nThread(id:%d, group:%d, cpu:%d) priority changed. credit:%d",
+				// 	u_obj->uthread_tid, u_obj->uthread_gid, u_obj->cpu_id, u_obj->credit);
 				u_obj->uthread_priority = OVER_PRIORITY;
 				u_obj->credit = 0;
 			}
@@ -229,7 +229,7 @@ extern void uthread_schedule(uthread_struct_t * (*kthread_best_sched_uthread)(kt
 	long wait_time_ms = (wait_time + 999) / 1000;
 
 	u_obj->wait_time += wait_time_ms;
-	fprintf(stderr, "\nwait_time: %ld", wait_time_ms);
+	// fprintf(stderr, "\nwait_time: %ld", wait_time_ms);
 	
 
 

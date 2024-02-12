@@ -228,10 +228,10 @@ static void ksched_cosched(int signal)
 
 	TAILQ_FOREACH (u_thread, uhead_prio_under, uthread_runq)
 	{
-		fprintf(stderr, "\n CPU: %d, UThread ID: %d, State: %d, Priority: %d, credit: %d",
-			cur_k_ctx->cpuid, u_thread->uthread_tid, u_thread->uthread_state, u_thread->uthread_priority, u_thread->credit);
+		// fprintf(stderr, "\n CPU: %d, UThread ID: %d, State: %d, Priority: %d, credit: %d",
+		// 	cur_k_ctx->cpuid, u_thread->uthread_tid, u_thread->uthread_state, u_thread->uthread_priority, u_thread->credit);
 		if(cur_k_ctx->timer_count % 3 == 0){
-			fprintf(stderr, "\n CPU: %d, UThread ID: %d credit increased.", cur_k_ctx->cpuid, u_thread->uthread_tid);
+			// fprintf(stderr, "\n CPU: %d, UThread ID: %d credit increased.", cur_k_ctx->cpuid, u_thread->uthread_tid);
 			u_thread->credit += 30;
 		}
 		
@@ -239,10 +239,10 @@ static void ksched_cosched(int signal)
 
 	TAILQ_FOREACH (u_thread, uhead_prio_over, uthread_runq)
 	{
-		fprintf(stderr, "\n CPU: %d, UThread ID: %d, State: %d, Priority: %d, credit: %d",
-			cur_k_ctx->cpuid, u_thread->uthread_tid, u_thread->uthread_state, u_thread->uthread_priority, u_thread->credit);
+		// fprintf(stderr, "\n CPU: %d, UThread ID: %d, State: %d, Priority: %d, credit: %d",
+		// 	cur_k_ctx->cpuid, u_thread->uthread_tid, u_thread->uthread_state, u_thread->uthread_priority, u_thread->credit);
 		if(cur_k_ctx->timer_count % 3 == 0){
-			fprintf(stderr, "\n CPU: %d, UThread ID: %d credit increased.", cur_k_ctx->cpuid, u_thread->uthread_tid);
+			// fprintf(stderr, "\n CPU: %d, UThread ID: %d credit increased.", cur_k_ctx->cpuid, u_thread->uthread_tid);
 			u_thread->credit += 30;
 			u_thread->uthread_priority = UNDER_PRIORITY;
 		}
@@ -286,7 +286,7 @@ static void ksched_priority(int signo)
 	cur_k_ctx = kthread_cpu_map[kthread_apic_id()];
 	KTHREAD_PRINT_SCHED_DEBUGINFO(cur_k_ctx, "VTALRM");
 
-	fprintf(stderr, "\n ksched_priority called!!!");
+	// fprintf(stderr, "\n ksched_priority called!!!");
 
 	cur_k_ctx->timer_count += 1;
 
@@ -300,10 +300,10 @@ static void ksched_priority(int signo)
 
 	TAILQ_FOREACH (u_thread, uhead_prio_under, uthread_runq)
 	{
-		fprintf(stderr, "\n CPU: %d, UThread ID: %d, State: %d, Priority: %d, credit: %d",
-			cur_k_ctx->cpuid, u_thread->uthread_tid, u_thread->uthread_state, u_thread->uthread_priority, u_thread->credit);
+		// fprintf(stderr, "\n CPU: %d, UThread ID: %d, State: %d, Priority: %d, credit: %d",
+		// 	cur_k_ctx->cpuid, u_thread->uthread_tid, u_thread->uthread_state, u_thread->uthread_priority, u_thread->credit);
 		if(cur_k_ctx->timer_count % 3 == 0){
-			fprintf(stderr, "\n CPU: %d, UThread ID: %d credit increased.", cur_k_ctx->cpuid, u_thread->uthread_tid);
+			// fprintf(stderr, "\n CPU: %d, UThread ID: %d credit increased.", cur_k_ctx->cpuid, u_thread->uthread_tid);
 			u_thread->credit += 30;
 		}
 		
@@ -311,10 +311,10 @@ static void ksched_priority(int signo)
 
 	TAILQ_FOREACH (u_thread, uhead_prio_over, uthread_runq)
 	{
-		fprintf(stderr, "\n CPU: %d, UThread ID: %d, State: %d, Priority: %d, credit: %d",
-			cur_k_ctx->cpuid, u_thread->uthread_tid, u_thread->uthread_state, u_thread->uthread_priority, u_thread->credit);
+		// fprintf(stderr, "\n CPU: %d, UThread ID: %d, State: %d, Priority: %d, credit: %d",
+		// 	cur_k_ctx->cpuid, u_thread->uthread_tid, u_thread->uthread_state, u_thread->uthread_priority, u_thread->credit);
 		if(cur_k_ctx->timer_count % 3 == 0){
-			fprintf(stderr, "\n CPU: %d, UThread ID: %d credit increased.", cur_k_ctx->cpuid, u_thread->uthread_tid);
+			// fprintf(stderr, "\n CPU: %d, UThread ID: %d credit increased.", cur_k_ctx->cpuid, u_thread->uthread_tid);
 			u_thread->credit += 30;
 			u_thread->uthread_priority = UNDER_PRIORITY;
 		}
