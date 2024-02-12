@@ -46,6 +46,7 @@ typedef struct __uthread_arg
 }uthread_arg_t;
 
 struct timeval tv1;
+matrix_t A, B, C;
 
 static void generate_matrix(matrix_t *mat, int val)
 {
@@ -71,18 +72,10 @@ static void * uthread_mulmat(void *p)
 
 	fprintf(stderr, "\nThread(id:%d, group:%d) started",ptr->tid, ptr->gid);
 
-	matrix_t *A = (matrix_t *)MALLOCZ_SAFE(sizeof(matrix_t));
-	matrix_t *B = (matrix_t *)MALLOCZ_SAFE(sizeof(matrix_t));
-	matrix_t *C = (matrix_t *)MALLOCZ_SAFE(sizeof(matrix_t));
-
-	generate_matrix(A, 1);
-	generate_matrix(B, 1);
-	generate_matrix(C, 0);
-
 	for(int i = 0; i < ptr->mat_size; i++){
 		for(int j = 0; j < ptr->mat_size; j++){
 			for(int k = 0; k < ptr->mat_size; k++){
-				C->m[i][j] += (A->m[i][k]) * (B->m[k][j]);
+				C.m[i][j] += (A.m[i][k]) * (B.m[k][j]);
 			}
 		}
 	}
@@ -140,6 +133,10 @@ int main()
 	//parse_args(argc, argv);
 
 	gtthread_app_init();
+
+	generate_matrix(&A, 1);
+	generate_matrix(&B, 1);
+	generate_matrix(&C, 0);
 
 	gettimeofday(&tv1,NULL);
 
