@@ -141,7 +141,7 @@ int main()
 
 	gettimeofday(&tv1,NULL);
 
-	int credit_groups[] = {25, 50, 75, 100};
+	int credit_groups[] = {100, 75, 50, 25};
 	unsigned int mat_sizes[] = {32, 64, 128, 256};
 
 	for(int i = 0; i < 8; i++){
