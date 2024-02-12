@@ -82,7 +82,7 @@ static void * uthread_mulmat(void *p)
 	}
 
 	gettimeofday(&tv2,NULL);
-	fprintf(stderr, "\nThread(id:%d, group:%d, size:%d, assigned_credit: %d) finished (TIME : %lu s and %lu us)",
+	fprintf(stderr, "\nThread(id:%d, group:%d, size:%d, assigned_credit: %d) finished (TIME : %lu s and %ld us)",
 			ptr->tid, ptr->gid, ptr->mat_size, ptr->assigned_credit, (tv2.tv_sec - tv1.tv_sec), (tv2.tv_usec - tv1.tv_usec));
 
 #undef ptr
