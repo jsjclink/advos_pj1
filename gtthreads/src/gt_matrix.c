@@ -61,7 +61,7 @@ static void generate_matrix(matrix_t *mat, int val)
 }
 
 
-extern int uthread_create(uthread_t *, void *, void *, uthread_group_t);
+extern int uthread_create(uthread_t *, void *, void *, uthread_group_t, int);
 
 static void * uthread_mulmat(void *p)
 {
@@ -157,7 +157,7 @@ int main()
 				uarg->tid = inx;
 				uarg->gid = 0;
 
-				uthread_create(&utids[inx], uthread_mulmat, uarg, uarg->gid);
+				uthread_create(&utids[inx], uthread_mulmat, uarg, uarg->gid, credit_groups[cdi]);
 			}
 		}
 	}

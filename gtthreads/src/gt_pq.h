@@ -4,6 +4,9 @@
 #define MAX_UTHREAD_PRIORITY 32
 #define MAX_UTHREAD_GROUPS 32
 #define DEFAULT_UTHREAD_PRIORITY 16
+#define UNDER_PRIORITY 16
+#define OVER_PRIORITY 0
+
 
 TAILQ_HEAD(uthread_head, uthread_struct);
 typedef struct uthread_head uthread_head_t;

@@ -27,6 +27,9 @@ typedef struct uthread_struct
 	int (*uthread_func)(void*);
 	void *uthread_arg;
 
+	int credit;
+	struct timeval curr_start_time;
+
 	void *exit_status; /* exit status */
 	int reserved1;
 	int reserved2;

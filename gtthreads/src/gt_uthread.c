@@ -31,7 +31,7 @@ static int uthread_init(uthread_struct_t *u_new);
 /* uthread creation */
 #define UTHREAD_DEFAULT_SSIZE (16 * 1024)
 
-extern int uthread_create(uthread_t *u_tid, int (*u_func)(void *), void *u_arg, uthread_group_t u_gid);
+extern int uthread_create(uthread_t *u_tid, int (*u_func)(void *), void *u_arg, uthread_group_t u_gid, int credit);
 
 /**********************************************************************/
 /** DEFNITIONS **/
@@ -150,6 +150,23 @@ extern void uthread_schedule(uthread_struct_t * (*kthread_best_sched_uthread)(kt
 		else
 		{
 			/* XXX: Apply uthread_group_penalty before insertion */
+			struct timeval end_time;
+			gettimeofday(&end_time, NULL);
+
+			long used_time = (end_time.tv_sec - u_obj->curr_start_time.tv_sec) * 1000000 + (end_time.tv_usec - u_obj->curr_start_time.tv_usec);
+			long used_credit = used_time / 1000;
+
+			fprintf(stderr, "\nThread(id:%d, group:%d, cpu:%d) used_credit: %ld", u_obj->uthread_tid, u_obj->uthread_gid, u_obj->cpu_id, used_credit);
+
+			u_obj->credit -= used_credit;
+			if(u_obj->credit < 0) {
+				fprintf(stderr, "\nThread(id:%d, group:%d, cpu:%d) priority changed. credit:%d",
+					u_obj->uthread_tid, u_obj->uthread_gid, u_obj->cpu_id, u_obj->credit);
+				u_obj->uthread_priority = OVER_PRIORITY;
+				u_obj->credit = 0;
+			}
+
+			
 			u_obj->uthread_state = UTHREAD_RUNNABLE;
 			add_to_runqueue(kthread_runq->expires_runq, &(kthread_runq->kthread_runqlock), u_obj);
 			/* XXX: Save the context (signal mask not saved) */
@@ -185,6 +202,12 @@ extern void uthread_schedule(uthread_struct_t * (*kthread_best_sched_uthread)(kt
 	/* Re-install the scheduling signal handlers */
 	kthread_install_sighandler(SIGVTALRM, k_ctx->kthread_sched_timer);
 	kthread_install_sighandler(SIGUSR1, k_ctx->kthread_sched_relay);
+	
+	struct timeval start_time;
+	gettimeofday(&start_time, NULL);
+	u_obj->curr_start_time = start_time;
+
+	
 	/* Jump to the selected uthread context */
 	siglongjmp(u_obj->uthread_env, 1);
 
@@ -230,7 +253,7 @@ static void uthread_context_func(int signo)
 
 extern kthread_runqueue_t *ksched_find_target(uthread_struct_t *);
 
-extern int uthread_create(uthread_t *u_tid, int (*u_func)(void *), void *u_arg, uthread_group_t u_gid)
+extern int uthread_create(uthread_t *u_tid, int (*u_func)(void *), void *u_arg, uthread_group_t u_gid, int credit)
 {
 	kthread_runqueue_t *kthread_runq;
 	uthread_struct_t *u_new;
@@ -247,10 +270,11 @@ extern int uthread_create(uthread_t *u_tid, int (*u_func)(void *), void *u_arg, 
 	}
 
 	u_new->uthread_state = UTHREAD_INIT;
-	u_new->uthread_priority = DEFAULT_UTHREAD_PRIORITY;
+	u_new->uthread_priority = UNDER_PRIORITY;
 	u_new->uthread_gid = u_gid;
 	u_new->uthread_func = u_func;
 	u_new->uthread_arg = u_arg;
+	u_new->credit = credit;
 
 	/* Allocate new stack for uthread */
 	u_new->uthread_stack.ss_flags = 0; /* Stack enabled for signal handling */

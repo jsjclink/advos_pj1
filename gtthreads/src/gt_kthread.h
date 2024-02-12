@@ -21,6 +21,8 @@ typedef struct __kthread_context
 	unsigned int pid;
 	unsigned int tid;
 
+	unsigned int timer_count;
+
 	unsigned int kthread_flags;
 	void (*kthread_app_func)(void *); /* kthread application function */
 	void (*kthread_sched_timer)(int); /* vtalrm signal handler */

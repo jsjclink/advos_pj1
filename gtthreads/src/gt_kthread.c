@@ -97,6 +97,9 @@ static void kthread_init(kthread_context_t *k_ctx)
 {
 	cpu_set_t cpu_affinity_mask;
 
+	// timer interrupt count
+	k_ctx->timer_count = 0;
+
 	/* initiate the mask, no CPU is selected*/
 	CPU_ZERO(&cpu_affinity_mask);
 
@@ -213,6 +216,37 @@ static void ksched_cosched(int signal)
 	cur_k_ctx = kthread_cpu_map[kthread_apic_id()];
 	KTHREAD_PRINT_SCHED_DEBUGINFO(cur_k_ctx, "RELAY(USR)");
 
+	cur_k_ctx->timer_count += 1;
+
+	uthread_struct_t *u_thread;
+
+	uthread_head_t *uhead_prio_under;
+	uthread_head_t *uhead_prio_over;
+
+	uhead_prio_under = &cur_k_ctx->krunqueue.active_runq->prio_array[UNDER_PRIORITY].group[0];
+	uhead_prio_over = &cur_k_ctx->krunqueue.active_runq->prio_array[OVER_PRIORITY].group[0];
+
+	TAILQ_FOREACH (u_thread, uhead_prio_under, uthread_runq)
+	{
+		if(cur_k_ctx->timer_count % 3 == 0){
+			fprintf(stderr, "\n CPU: %d, UThread ID: %d credit increased.", cur_k_ctx->cpuid, u_thread->uthread_tid);
+			u_thread->credit += 30;
+		}
+		fprintf(stderr, "\n CPU: %d, UThread ID: %d, State: %d, Priority: %d, credit: %d",
+			cur_k_ctx->cpuid, u_thread->uthread_tid, u_thread->uthread_state, u_thread->uthread_priority, u_thread->credit);
+	}
+
+	TAILQ_FOREACH (u_thread, uhead_prio_over, uthread_runq)
+	{
+		if(cur_k_ctx->timer_count % 3 == 0){
+			fprintf(stderr, "\n CPU: %d, UThread ID: %d credit increased.", cur_k_ctx->cpuid, u_thread->uthread_tid);
+			u_thread->credit += 30;
+		}
+		fprintf(stderr, "\n CPU: %d, UThread ID: %d, State: %d, Priority: %d, credit: %d",
+			cur_k_ctx->cpuid, u_thread->uthread_tid, u_thread->uthread_state, u_thread->uthread_priority, u_thread->credit);
+	}
+
+
 #ifdef CO_SCHED
 	uthread_schedule(&sched_find_best_uthread_group);
 #else
@@ -249,6 +283,38 @@ static void ksched_priority(int signo)
 
 	cur_k_ctx = kthread_cpu_map[kthread_apic_id()];
 	KTHREAD_PRINT_SCHED_DEBUGINFO(cur_k_ctx, "VTALRM");
+
+	fprintf(stderr, "\n ksched_priority called!!!");
+
+	cur_k_ctx->timer_count += 1;
+
+	uthread_struct_t *u_thread;
+
+	uthread_head_t *uhead_prio_under;
+	uthread_head_t *uhead_prio_over;
+
+	uhead_prio_under = &cur_k_ctx->krunqueue.active_runq->prio_array[UNDER_PRIORITY].group[0];
+	uhead_prio_over = &cur_k_ctx->krunqueue.active_runq->prio_array[OVER_PRIORITY].group[0];
+
+	TAILQ_FOREACH (u_thread, uhead_prio_under, uthread_runq)
+	{
+		if(cur_k_ctx->timer_count % 3 == 0){
+			fprintf(stderr, "\n CPU: %d, UThread ID: %d credit increased.", cur_k_ctx->cpuid, u_thread->uthread_tid);
+			u_thread->credit += 30;
+		}
+		fprintf(stderr, "\n CPU: %d, UThread ID: %d, State: %d, Priority: %d, credit: %d",
+			cur_k_ctx->cpuid, u_thread->uthread_tid, u_thread->uthread_state, u_thread->uthread_priority, u_thread->credit);
+	}
+
+	TAILQ_FOREACH (u_thread, uhead_prio_over, uthread_runq)
+	{
+		if(cur_k_ctx->timer_count % 3 == 0){
+			fprintf(stderr, "\n CPU: %d, UThread ID: %d credit increased.", cur_k_ctx->cpuid, u_thread->uthread_tid);
+			u_thread->credit += 30;
+		}
+		fprintf(stderr, "\n CPU: %d, UThread ID: %d, State: %d, Priority: %d, credit: %d",
+			cur_k_ctx->cpuid, u_thread->uthread_tid, u_thread->uthread_state, u_thread->uthread_priority, u_thread->credit);
+	}
 
 	/* Relay the signal to all other virtual processors(kthreads) */
 	for(inx=0; inx<GT_MAX_KTHREADS; inx++)
