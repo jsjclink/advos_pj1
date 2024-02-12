@@ -132,6 +132,20 @@ extern void uthread_schedule(uthread_struct_t * (*kthread_best_sched_uthread)(kt
 
 		if(u_obj->uthread_state & (UTHREAD_DONE | UTHREAD_CANCELLED))
 		{
+			struct timeval end_time;
+			gettimeofday(&end_time, NULL);
+
+			long used_time = (end_time.tv_sec - u_obj->curr_start_time.tv_sec) * 1000000 + (end_time.tv_usec - u_obj->curr_start_time.tv_usec);
+			long used_time_ms = (used_time + 999) / 1000;
+
+			fprintf(stderr, "\nused_time_ms: %ld", used_time_ms);
+
+			u_obj->cpu_time += used_time_ms;
+			fprintf(stderr, "\nUThread(id:%d, group:%d, cpu:%d) finished. cpu_time: %ld, wait_time: %ld", 
+				u_obj->uthread_tid, u_obj->uthread_gid, u_obj->cpu_id, u_obj->cpu_time, u_obj->wait_time);
+
+
+
 			/* XXX: Inserting uthread into zombie queue is causing improper
 			 * cleanup/exit of uthread (core dump) */
 			uthread_head_t * kthread_zhead = &(kthread_runq->zombie_uthreads);
@@ -156,6 +170,9 @@ extern void uthread_schedule(uthread_struct_t * (*kthread_best_sched_uthread)(kt
 			long used_time = (end_time.tv_sec - u_obj->curr_start_time.tv_sec) * 1000000 + (end_time.tv_usec - u_obj->curr_start_time.tv_usec);
 			long used_credit = (used_time + 999) / 1000;
 
+			u_obj->cpu_time += used_credit;
+			fprintf(stderr, "\nused_time_ms: %ld", used_credit);
+
 			fprintf(stderr, "\nThread(id:%d, group:%d, cpu:%d) used_credit: %ld", u_obj->uthread_tid, u_obj->uthread_gid, u_obj->cpu_id, used_credit);
 
 			u_obj->credit -= used_credit;
@@ -166,6 +183,7 @@ extern void uthread_schedule(uthread_struct_t * (*kthread_best_sched_uthread)(kt
 				u_obj->credit = 0;
 			}
 
+			u_obj->curr_wait_time = end_time;
 			
 			u_obj->uthread_state = UTHREAD_RUNNABLE;
 			add_to_runqueue(kthread_runq->active_runq, &(kthread_runq->kthread_runqlock), u_obj);
@@ -206,6 +224,14 @@ extern void uthread_schedule(uthread_struct_t * (*kthread_best_sched_uthread)(kt
 	struct timeval start_time;
 	gettimeofday(&start_time, NULL);
 	u_obj->curr_start_time = start_time;
+
+	long wait_time = (start_time.tv_sec - u_obj->curr_wait_time.tv_sec) * 1000000 + (start_time.tv_usec - u_obj->curr_wait_time.tv_usec);
+	long wait_time_ms = (wait_time + 999) / 1000;
+
+	u_obj->wait_time += wait_time_ms;
+	fprintf(stderr, "\nwait_time: %ld", wait_time_ms);
+	
+
 
 	
 	/* Jump to the selected uthread context */
@@ -275,6 +301,11 @@ extern int uthread_create(uthread_t *u_tid, int (*u_func)(void *), void *u_arg, 
 	u_new->uthread_func = u_func;
 	u_new->uthread_arg = u_arg;
 	u_new->credit = credit;
+	u_new->cpu_time = 0;
+	u_new->wait_time = 0;
+	gettimeofday(&(u_new->curr_wait_time), NULL);
+	gettimeofday(&(u_new->curr_start_time), NULL);
+
 
 	/* Allocate new stack for uthread */
 	u_new->uthread_stack.ss_flags = 0; /* Stack enabled for signal handling */

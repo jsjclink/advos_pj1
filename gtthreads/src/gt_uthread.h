@@ -29,6 +29,10 @@ typedef struct uthread_struct
 
 	int credit;
 	struct timeval curr_start_time;
+	struct timeval curr_wait_time;
+
+	long cpu_time;
+	long wait_time;
 
 	void *exit_status; /* exit status */
 	int reserved1;
