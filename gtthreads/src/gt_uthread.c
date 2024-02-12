@@ -154,7 +154,7 @@ extern void uthread_schedule(uthread_struct_t * (*kthread_best_sched_uthread)(kt
 			gettimeofday(&end_time, NULL);
 
 			long used_time = (end_time.tv_sec - u_obj->curr_start_time.tv_sec) * 1000000 + (end_time.tv_usec - u_obj->curr_start_time.tv_usec);
-			long used_credit = used_time / 1000;
+			long used_credit = (used_time + 999) / 1000;
 
 			fprintf(stderr, "\nThread(id:%d, group:%d, cpu:%d) used_credit: %ld", u_obj->uthread_tid, u_obj->uthread_gid, u_obj->cpu_id, used_credit);
 
@@ -168,7 +168,7 @@ extern void uthread_schedule(uthread_struct_t * (*kthread_best_sched_uthread)(kt
 
 			
 			u_obj->uthread_state = UTHREAD_RUNNABLE;
-			add_to_runqueue(kthread_runq->expires_runq, &(kthread_runq->kthread_runqlock), u_obj);
+			add_to_runqueue(kthread_runq->active_runq, &(kthread_runq->kthread_runqlock), u_obj);
 			/* XXX: Save the context (signal mask not saved) */
 			if(sigsetjmp(u_obj->uthread_env, 0))
 				return;

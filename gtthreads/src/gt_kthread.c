@@ -216,7 +216,7 @@ static void ksched_cosched(int signal)
 	cur_k_ctx = kthread_cpu_map[kthread_apic_id()];
 	KTHREAD_PRINT_SCHED_DEBUGINFO(cur_k_ctx, "RELAY(USR)");
 
-	cur_k_ctx->timer_count += 1;
+		cur_k_ctx->timer_count += 1;
 
 	uthread_struct_t *u_thread;
 
@@ -230,7 +230,9 @@ static void ksched_cosched(int signal)
 	{
 		if(cur_k_ctx->timer_count % 3 == 0){
 			fprintf(stderr, "\n CPU: %d, UThread ID: %d credit increased.", cur_k_ctx->cpuid, u_thread->uthread_tid);
-			u_thread->credit += 30;
+			if(u_thread->credit == 0){
+				u_thread->credit += 30;
+			}
 		}
 		fprintf(stderr, "\n CPU: %d, UThread ID: %d, State: %d, Priority: %d, credit: %d",
 			cur_k_ctx->cpuid, u_thread->uthread_tid, u_thread->uthread_state, u_thread->uthread_priority, u_thread->credit);
@@ -240,7 +242,9 @@ static void ksched_cosched(int signal)
 	{
 		if(cur_k_ctx->timer_count % 3 == 0){
 			fprintf(stderr, "\n CPU: %d, UThread ID: %d credit increased.", cur_k_ctx->cpuid, u_thread->uthread_tid);
-			u_thread->credit += 30;
+			if(u_thread->credit == 0){
+				u_thread->credit += 30;
+			}
 		}
 		fprintf(stderr, "\n CPU: %d, UThread ID: %d, State: %d, Priority: %d, credit: %d",
 			cur_k_ctx->cpuid, u_thread->uthread_tid, u_thread->uthread_state, u_thread->uthread_priority, u_thread->credit);
@@ -300,7 +304,9 @@ static void ksched_priority(int signo)
 	{
 		if(cur_k_ctx->timer_count % 3 == 0){
 			fprintf(stderr, "\n CPU: %d, UThread ID: %d credit increased.", cur_k_ctx->cpuid, u_thread->uthread_tid);
-			u_thread->credit += 30;
+			if(u_thread->credit == 0){
+				u_thread->credit += 30;
+			}
 		}
 		fprintf(stderr, "\n CPU: %d, UThread ID: %d, State: %d, Priority: %d, credit: %d",
 			cur_k_ctx->cpuid, u_thread->uthread_tid, u_thread->uthread_state, u_thread->uthread_priority, u_thread->credit);
@@ -310,7 +316,9 @@ static void ksched_priority(int signo)
 	{
 		if(cur_k_ctx->timer_count % 3 == 0){
 			fprintf(stderr, "\n CPU: %d, UThread ID: %d credit increased.", cur_k_ctx->cpuid, u_thread->uthread_tid);
-			u_thread->credit += 30;
+			if(u_thread->credit == 0){
+				u_thread->credit += 30;
+			}
 		}
 		fprintf(stderr, "\n CPU: %d, UThread ID: %d, State: %d, Priority: %d, credit: %d",
 			cur_k_ctx->cpuid, u_thread->uthread_tid, u_thread->uthread_state, u_thread->uthread_priority, u_thread->credit);
