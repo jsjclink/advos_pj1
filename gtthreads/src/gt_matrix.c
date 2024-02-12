@@ -40,6 +40,7 @@ typedef struct matrix
 
 typedef struct __uthread_arg
 {
+	int assigned_credit;
 	unsigned int mat_size;
 	unsigned int tid;
 	unsigned int gid;
@@ -70,7 +71,7 @@ static void * uthread_mulmat(void *p)
 
 #define ptr ((uthread_arg_t *)p)
 
-	fprintf(stderr, "\nThread(id:%d, group:%d) started",ptr->tid, ptr->gid);
+	fprintf(stderr, "\nThread(id:%d, group:%d, size:%d, assigned_credit: %d) started",ptr->tid, ptr->gid, ptr->mat_size, ptr->assigned_credit);
 
 	for(int i = 0; i < ptr->mat_size; i++){
 		for(int j = 0; j < ptr->mat_size; j++){
@@ -81,8 +82,8 @@ static void * uthread_mulmat(void *p)
 	}
 
 	gettimeofday(&tv2,NULL);
-	fprintf(stderr, "\nThread(id:%d, group:%d, size:%d) finished (TIME : %lu s and %lu us)",
-			ptr->tid, ptr->gid, ptr->mat_size, (tv2.tv_sec - tv1.tv_sec), (tv2.tv_usec - tv1.tv_usec));
+	fprintf(stderr, "\nThread(id:%d, group:%d, size:%d, assigned_credit: %d) finished (TIME : %lu s and %lu us)",
+			ptr->tid, ptr->gid, ptr->mat_size, ptr->assigned_credit, (tv2.tv_sec - tv1.tv_sec), (tv2.tv_usec - tv1.tv_usec));
 
 #undef ptr
 	return 0;
@@ -153,6 +154,7 @@ int main()
 				uarg->mat_size = mat_sizes[msi];
 				uarg->tid = inx;
 				uarg->gid = 0;
+				uarg->assigned_credit = credit_groups[cdi];
 
 				uthread_create(&utids[inx], uthread_mulmat, uarg, uarg->gid, 100000000);
 			}
