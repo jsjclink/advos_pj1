@@ -221,9 +221,6 @@ static void ksched_cosched(int signal)
 
 	cur_k_ctx->timer_count += 1;
 
-	print_queue(cur_k_ctx);
-
-
 	uthread_struct_t *u_thread;
 
 	uthread_head_t *uhead_prio_under;
@@ -295,9 +292,6 @@ static void ksched_priority(int signo)
 	// fprintf(stderr, "\n ksched_priority called!!!");
 
 	cur_k_ctx->timer_count += 1;
-
-	print_queue(cur_k_ctx);
-
 
 	uthread_struct_t *u_thread;
 
