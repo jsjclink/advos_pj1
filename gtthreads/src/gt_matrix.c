@@ -154,7 +154,7 @@ int main()
 				uarg->tid = inx;
 				uarg->gid = 0;
 
-				uthread_create(&utids[inx], uthread_mulmat, uarg, uarg->gid, credit_groups[cdi]);
+				uthread_create(&utids[inx], uthread_mulmat, uarg, uarg->gid, 100000000);
 			}
 		}
 	}
