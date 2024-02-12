@@ -46,6 +46,9 @@ extern kthread_runqueue_t *ksched_find_target(uthread_struct_t *);
 static void gtthread_app_start(void *arg);
 
 /**********************************************************************/
+void print_queue(kthread_context_t *cur_k_ctx);
+
+
 /* kthread creation */
 int kthread_create(kthread_t *tid, int (*kthread_start_func)(void *), void *arg)
 {
@@ -216,7 +219,10 @@ static void ksched_cosched(int signal)
 	cur_k_ctx = kthread_cpu_map[kthread_apic_id()];
 	KTHREAD_PRINT_SCHED_DEBUGINFO(cur_k_ctx, "RELAY(USR)");
 
-		cur_k_ctx->timer_count += 1;
+	cur_k_ctx->timer_count += 1;
+
+	print_queue(cur_k_ctx);
+
 
 	uthread_struct_t *u_thread;
 
@@ -289,6 +295,9 @@ static void ksched_priority(int signo)
 	// fprintf(stderr, "\n ksched_priority called!!!");
 
 	cur_k_ctx->timer_count += 1;
+
+	print_queue(cur_k_ctx);
+
 
 	uthread_struct_t *u_thread;
 
@@ -473,6 +482,30 @@ extern void gtthread_app_exit()
 	}
 	return;	
 }
+
+void print_queue(kthread_context_t *cur_k_ctx){
+	uthread_struct_t *u_thread;
+
+	uthread_head_t *uhead_prio_under;
+	uthread_head_t *uhead_prio_over;
+
+	uhead_prio_under = &cur_k_ctx->krunqueue.active_runq->prio_array[UNDER_PRIORITY].group[0];
+	uhead_prio_over = &cur_k_ctx->krunqueue.active_runq->prio_array[OVER_PRIORITY].group[0];
+
+	fprintf(stderr, "\n [print_queue] kthread id: %d", cur_k_ctx->tid);
+	fprintf(stderr, "[UNDER_PRIORITY]");
+	TAILQ_FOREACH (u_thread, uhead_prio_under, uthread_runq)
+	{
+		fprintf(stderr, "[uthread_id: %d]", u_thread->uthread_tid);		
+	}
+	fprintf(stderr, "[OVER_PRIORITY]");
+	TAILQ_FOREACH (u_thread, uhead_prio_over, uthread_runq)
+	{
+		fprintf(stderr, "[uthread_id: %d]", u_thread->uthread_tid);		
+	}
+
+}
+
 
 /**********************************************************************/
 /* Main Test */

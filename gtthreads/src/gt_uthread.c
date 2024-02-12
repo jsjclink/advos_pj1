@@ -343,6 +343,11 @@ extern int uthread_create(uthread_t *u_tid, int (*u_func)(void *), void *u_arg, 
 	return 0;
 }
 
+void uthread_yield(void) {
+    raise(SIGVTALRM);
+}
+
+
 #if 0
 /**********************************************************************/
 kthread_runqueue_t kthread_runqueue;

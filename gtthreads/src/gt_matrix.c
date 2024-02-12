@@ -77,6 +77,11 @@ static void * uthread_mulmat(void *p)
 		for(int j = 0; j < ptr->mat_size; j++){
 			for(int k = 0; k < ptr->mat_size; k++){
 				C.m[i][j] += (A.m[i][k]) * (B.m[k][j]);
+
+				if(ptr->tid == 50 && i == 16 && j == 16 && k == 16){
+					fprintf(stderr, "\n[YIELD CALLED] thread_id: %d", ptr->tid);
+					uthread_yield();
+				}
 			}
 		}
 	}
