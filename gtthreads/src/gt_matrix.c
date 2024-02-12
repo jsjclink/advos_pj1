@@ -144,11 +144,11 @@ int main()
 	int credit_groups[] = {25, 50, 75, 100};
 	unsigned int mat_sizes[] = {32, 64, 128, 256};
 
-	for(int cdi = 0; cdi < 4; cdi++){
-		for(int msi = 0; msi < 4; msi++){
-			for(int i = 0; i < 8; i++){
-				int inx = cdi * 32 + msi * 8 + i;
-				
+	for(int i = 0; i < 8; i++){
+		for(int cdi = 0; cdi < 4; cdi++){
+			for(int msi = 0; msi < 4; msi++){
+				int inx = i * 16 + cdi * 4 + msi;
+
 				uarg = &uargs[inx];
 
 				uarg->mat_size = mat_sizes[msi];
