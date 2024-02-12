@@ -156,7 +156,7 @@ int main()
 				uarg->gid = 0;
 				uarg->assigned_credit = credit_groups[cdi];
 
-				uthread_create(&utids[inx], uthread_mulmat, uarg, uarg->gid, 100000000);
+				uthread_create(&utids[inx], uthread_mulmat, uarg, uarg->gid, credit_groups[cdi]);
 			}
 		}
 	}
