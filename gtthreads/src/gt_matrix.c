@@ -135,8 +135,8 @@ int main()
 
 	gtthread_app_init();
 
-	generate_matrix(&A, 1);
-	generate_matrix(&B, 1);
+	generate_matrix(&A, 112387945);
+	generate_matrix(&B, 14358934);
 	generate_matrix(&C, 0);
 
 	gettimeofday(&tv1,NULL);
