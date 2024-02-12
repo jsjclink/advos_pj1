@@ -1,0 +1,331 @@
+
+Thread(id:7, group:0) started
+Thread(id:6, group:0) started
+Thread(id:0, group:0) started
+Thread(id:7, group:0, size:32) finished (TIME : 0 s and 21821 us)
+Thread(id:5, group:0) started
+Thread(id:15, group:0) started
+Thread(id:3, group:0) started
+Thread(id:4, group:0) started
+Thread(id:0, group:0, size:32) finished (TIME : 0 s and 48228 us)
+Thread(id:8, group:0) started
+Thread(id:3, group:0, size:32) finished (TIME : 0 s and 53634 us)
+Thread(id:11, group:0) started
+Thread(id:11, group:0, size:64) finished (TIME : 0 s and 56999 us)
+Thread(id:19, group:0) started
+Thread(id:2, group:0) started
+Thread(id:2, group:0, size:32) finished (TIME : 0 s and 59346 us)
+Thread(id:10, group:0) started
+Thread(id:1, group:0) started
+Thread(id:15, group:0, size:64) finished (TIME : 0 s and 87257 us)
+Thread(id:23, group:0) started
+Thread(id:1, group:0, size:32) finished (TIME : 0 s and 113800 us)
+Thread(id:9, group:0) started
+Thread(id:4, group:0, size:32) finished (TIME : 0 s and 123133 us)
+Thread(id:12, group:0) started
+Thread(id:8, group:0, size:64) finished (TIME : 0 s and 125603 us)
+Thread(id:12, group:0, size:64) finished (TIME : 0 s and 140180 us)
+Thread(id:16, group:0) started
+Thread(id:6, group:0, size:32) finished (TIME : 0 s and 153835 us)
+Thread(id:14, group:0) started
+Thread(id:23, group:0, size:128) finished (TIME : 0 s and 157015 us)
+Thread(id:31, group:0) started
+Thread(id:20, group:0) started
+Thread(id:9, group:0, size:64) finished (TIME : 0 s and 195375 us)
+Thread(id:17, group:0) started
+Thread(id:5, group:0, size:32) finished (TIME : 0 s and 204265 us)
+Thread(id:14, group:0, size:64) finished (TIME : 0 s and 206125 us)
+Thread(id:22, group:0) started
+Thread(id:13, group:0) started
+Thread(id:10, group:0, size:64) finished (TIME : 0 s and 244980 us)
+Thread(id:18, group:0) started
+Thread(id:19, group:0, size:128) finished (TIME : 0 s and 247547 us)
+Thread(id:27, group:0) started
+Thread(id:13, group:0, size:64) finished (TIME : 0 s and 285257 us)
+Thread(id:22, group:0, size:128) finished (TIME : 0 s and 288646 us)
+Thread(id:21, group:0) started
+Thread(id:20, group:0, size:128) finished (TIME : 0 s and 324637 us)
+Thread(id:30, group:0) started
+Thread(id:28, group:0) started
+Thread(id:16, group:0, size:128) finished (TIME : 0 s and 337009 us)
+Thread(id:24, group:0) started
+Thread(id:21, group:0, size:128) finished (TIME : 0 s and 390907 us)
+Thread(id:17, group:0, size:128) finished (TIME : 0 s and 396129 us)
+Thread(id:25, group:0) started
+Thread(id:18, group:0, size:128) finished (TIME : 0 s and 404284 us)
+Thread(id:26, group:0) started
+Thread(id:29, group:0) started
+ ksched_priority called!!!
+ CPU: 0, UThread ID: 39, State: 1, Priority: 16, credit: 50
+ CPU: 0, UThread ID: 47, State: 1, Priority: 16, credit: 50
+ CPU: 0, UThread ID: 55, State: 1, Priority: 16, credit: 50
+ CPU: 0, UThread ID: 63, State: 1, Priority: 16, credit: 50
+ CPU: 0, UThread ID: 71, State: 1, Priority: 16, credit: 75
+ CPU: 0, UThread ID: 79, State: 1, Priority: 16, credit: 75
+ CPU: 0, UThread ID: 87, State: 1, Priority: 16, credit: 75
+ CPU: 0, UThread ID: 95, State: 1, Priority: 16, credit: 75
+ CPU: 0, UThread ID: 103, State: 1, Priority: 16, credit: 100
+ CPU: 0, UThread ID: 111, State: 1, Priority: 16, credit: 100
+ CPU: 0, UThread ID: 119, State: 1, Priority: 16, credit: 100
+ CPU: 0, UThread ID: 127, State: 1, Priority: 16, credit: 100
+Thread(id:31, group:0, cpu:0) used_credit: 344
+ CPU: 6, UThread ID: 37, State: 1, Priority: 16, credit: 50
+ CPU: 6, UThread ID: 45, State: 1, Priority: 16, credit: 50
+ CPU: 6, UThread ID: 53, State: 1, Priority: 16, credit: 50
+ CPU: 6, UThread ID: 61, State: 1, Priority: 16, credit: 50
+ CPU: 6, UThread ID: 69, State: 1, Priority: 16, credit: 75
+ CPU: 6, UThread ID: 77, State: 1, Priority: 16, credit: 75
+ CPU: 6, UThread ID: 85, State: 1, Priority: 16, credit: 75
+ CPU: 6, UThread ID: 93, State: 1, Priority: 16, credit: 75
+ CPU: 6, UThread ID: 101, State: 1, Priority: 16, credit: 100
+ CPU: 6, UThread ID: 109, State: 1, Priority: 16, credit: 100
+ CPU: 6, UThread ID: 117, State: 1, Priority: 16, credit: 100
+ CPU: 6, UThread ID: 125, State: 1, Priority: 16, credit: 100
+Thread(id:29, group:0, cpu:6) used_credit: 71
+Thread(id:29, group:0, cpu:6) priority changed. credit:-46
+Thread(id:37, group:0) started
+Thread(id:31, group:0, cpu:0) priority changed. credit:-319
+Thread(id:39, group:0) started
+Thread(id:37, group:0, size:32) finished (TIME : 0 s and 504050 us)
+Thread(id:45, group:0) started
+Thread(id:39, group:0, size:32) finished (TIME : 0 s and 504858 us)
+Thread(id:47, group:0) started
+ CPU: 5, UThread ID: 36, State: 1, Priority: 16, credit: 50
+ CPU: 5, UThread ID: 44, State: 1, Priority: 16, credit: 50
+ CPU: 5, UThread ID: 52, State: 1, Priority: 16, credit: 50
+ CPU: 5, UThread ID: 60, State: 1, Priority: 16, credit: 50
+ CPU: 5, UThread ID: 68, State: 1, Priority: 16, credit: 75
+ CPU: 5, UThread ID: 76, State: 1, Priority: 16, credit: 75
+ CPU: 5, UThread ID: 84, State: 1, Priority: 16, credit: 75
+ CPU: 5, UThread ID: 92, State: 1, Priority: 16, credit: 75
+ CPU: 5, UThread ID: 100, State: 1, Priority: 16, credit: 100
+ CPU: 5, UThread ID: 108, State: 1, Priority: 16, credit: 100
+ CPU: 5, UThread ID: 116, State: 1, Priority: 16, credit: 100
+ CPU: 5, UThread ID: 124, State: 1, Priority: 16, credit: 100
+Thread(id:28, group:0, cpu:5) used_credit: 179
+Thread(id:28, group:0, cpu:5) priority changed. credit:-154
+ CPU: 3, UThread ID: 34, State: 1, Priority: 16, credit: 50
+ CPU: 7, UThread ID: 38, State: 1, Priority: 16, credit: 50
+ CPU: 3, UThread ID: 42, State: 1, Priority: 16, credit: 50
+ CPU: 7, UThread ID: 46, State: 1, Priority: 16, credit: 50
+ CPU: 3, UThread ID: 50, State: 1, Priority: 16, credit: 50
+ CPU: 7, UThread ID: 54, State: 1, Priority: 16, credit: 50
+ CPU: 3, UThread ID: 58, State: 1, Priority: 16, credit: 50
+ CPU: 7, UThread ID: 62, State: 1, Priority: 16, credit: 50
+ CPU: 3, UThread ID: 66, State: 1, Priority: 16, credit: 75
+ CPU: 7, UThread ID: 70, State: 1, Priority: 16, credit: 75
+ CPU: 3, UThread ID: 74, State: 1, Priority: 16, credit: 75
+ CPU: 7, UThread ID: 78, State: 1, Priority: 16, credit: 75
+ CPU: 3, UThread ID: 82, State: 1, Priority: 16, credit: 75
+ CPU: 7, UThread ID: 86, State: 1, Priority: 16, credit: 75
+ CPU: 3, UThread ID: 90, State: 1, Priority: 16, credit: 75
+ CPU: 7, UThread ID: 94, State: 1, Priority: 16, credit: 75
+ CPU: 3, UThread ID: 98, State: 1, Priority: 16, credit: 100
+ CPU: 7, UThread ID: 102, State: 1, Priority: 16, credit: 100
+ CPU: 3, UThread ID: 106, State: 1, Priority: 16, credit: 100
+ CPU: 7, UThread ID: 110, State: 1, Priority: 16, credit: 100
+ CPU: 3, UThread ID: 114, State: 1, Priority: 16, credit: 100
+ CPU: 7, UThread ID: 118, State: 1, Priority: 16, credit: 100
+ CPU: 3, UThread ID: 122, State: 1, Priority: 16, credit: 100
+ CPU: 7, UThread ID: 126, State: 1, Priority: 16, credit: 100
+Thread(id:26, group:0, cpu:3) used_credit: 117
+Thread(id:30, group:0, cpu:7) used_credit: 189
+Thread(id:26, group:0, cpu:3) priority changed. credit:-92
+Thread(id:30, group:0, cpu:7) priority changed. credit:-164
+ CPU: 4, UThread ID: 35, State: 1, Priority: 16, credit: 50
+ CPU: 1, UThread ID: 32, State: 1, Priority: 16, credit: 50
+ CPU: 4, UThread ID: 43, State: 1, Priority: 16, credit: 50
+ CPU: 1, UThread ID: 40, State: 1, Priority: 16, credit: 50
+ CPU: 4, UThread ID: 51, State: 1, Priority: 16, credit: 50
+ CPU: 1, UThread ID: 48, State: 1, Priority: 16, credit: 50
+ CPU: 4, UThread ID: 59, State: 1, Priority: 16, credit: 50
+ CPU: 1, UThread ID: 56, State: 1, Priority: 16, credit: 50
+ CPU: 4, UThread ID: 67, State: 1, Priority: 16, credit: 75
+ CPU: 1, UThread ID: 64, State: 1, Priority: 16, credit: 75
+ CPU: 4, UThread ID: 75, State: 1, Priority: 16, credit: 75
+ CPU: 1, UThread ID: 72, State: 1, Priority: 16, credit: 75
+ CPU: 4, UThread ID: 83, State: 1, Priority: 16, credit: 75
+ CPU: 1, UThread ID: 80, State: 1, Priority: 16, credit: 75
+ CPU: 4, UThread ID: 91, State: 1, Priority: 16, credit: 75
+ CPU: 1, UThread ID: 88, State: 1, Priority: 16, credit: 75
+ CPU: 4, UThread ID: 99, State: 1, Priority: 16, credit: 100
+ CPU: 1, UThread ID: 96, State: 1, Priority: 16, credit: 100
+ CPU: 4, UThread ID: 107, State: 1, Priority: 16, credit: 100
+ CPU: 1, UThread ID: 104, State: 1, Priority: 16, credit: 100
+Thread(id:36, group:0) started
+ CPU: 4, UThread ID: 115, State: 1, Priority: 16, credit: 100
+ CPU: 1, UThread ID: 112, State: 1, Priority: 16, credit: 100
+ CPU: 4, UThread ID: 123, State: 1, Priority: 16, credit: 100
+ CPU: 1, UThread ID: 120, State: 1, Priority: 16, credit: 100
+Thread(id:27, group:0, cpu:4) used_credit: 260
+Thread(id:24, group:0, cpu:1) used_credit: 160
+Thread(id:27, group:0, cpu:4) priority changed. credit:-235
+Thread(id:24, group:0, cpu:1) priority changed. credit:-135
+Thread(id:35, group:0) started
+Thread(id:32, group:0) started
+Thread(id:45, group:0, size:64) finished (TIME : 0 s and 535450 us)
+Thread(id:34, group:0) started
+Thread(id:38, group:0) started
+ CPU: 2, UThread ID: 33, State: 1, Priority: 16, credit: 50
+ CPU: 2, UThread ID: 41, State: 1, Priority: 16, credit: 50
+ CPU: 2, UThread ID: 49, State: 1, Priority: 16, credit: 50
+ CPU: 2, UThread ID: 57, State: 1, Priority: 16, credit: 50
+ CPU: 2, UThread ID: 65, State: 1, Priority: 16, credit: 75
+ CPU: 2, UThread ID: 73, State: 1, Priority: 16, credit: 75
+ CPU: 2, UThread ID: 81, State: 1, Priority: 16, credit: 75
+ CPU: 2, UThread ID: 89, State: 1, Priority: 16, credit: 75
+ CPU: 2, UThread ID: 97, State: 1, Priority: 16, credit: 100
+ CPU: 2, UThread ID: 105, State: 1, Priority: 16, credit: 100
+ CPU: 2, UThread ID: 113, State: 1, Priority: 16, credit: 100
+ CPU: 2, UThread ID: 121, State: 1, Priority: 16, credit: 100
+Thread(id:25, group:0, cpu:2) used_credit: 142
+Thread(id:25, group:0, cpu:2) priority changed. credit:-117
+Thread(id:53, group:0) started
+Thread(id:34, group:0, size:32) finished (TIME : 0 s and 567740 us)
+Thread(id:42, group:0) started
+Thread(id:47, group:0, size:64) finished (TIME : 0 s and 567759 us)
+Thread(id:36, group:0, size:32) finished (TIME : 0 s and 579659 us)
+Thread(id:44, group:0) started
+Thread(id:33, group:0) started
+Thread(id:55, group:0) started
+Thread(id:33, group:0, size:32) finished (TIME : 1 s and 18446744073709184302 us)
+Thread(id:41, group:0) started
+Thread(id:42, group:0, size:64) finished (TIME : 1 s and 18446744073709186642 us)
+Thread(id:50, group:0) started
+Thread(id:41, group:0, size:64) finished (TIME : 1 s and 18446744073709187778 us)
+Thread(id:49, group:0) started
+Thread(id:32, group:0, size:32) finished (TIME : 1 s and 18446744073709190574 us)
+Thread(id:40, group:0) started
+Thread(id:35, group:0, size:32) finished (TIME : 1 s and 18446744073709194405 us)
+Thread(id:43, group:0) started
+Thread(id:43, group:0, size:64) finished (TIME : 1 s and 18446744073709197914 us)
+Thread(id:51, group:0) started
+Thread(id:44, group:0, size:64) finished (TIME : 1 s and 18446744073709217206 us)
+Thread(id:52, group:0) started
+Thread(id:55, group:0, size:128) finished (TIME : 1 s and 18446744073709218339 us)
+Thread(id:63, group:0) started
+Thread(id:40, group:0, size:64) finished (TIME : 1 s and 18446744073709224511 us)
+Thread(id:48, group:0) started
+Thread(id:38, group:0, size:32) finished (TIME : 1 s and 18446744073709228871 us)
+Thread(id:46, group:0) started
+Thread(id:46, group:0, size:64) finished (TIME : 1 s and 18446744073709254352 us)
+Thread(id:54, group:0) started
+Thread(id:53, group:0, size:128) finished (TIME : 1 s and 18446744073709256741 us)
+Thread(id:61, group:0) started
+Thread(id:50, group:0, size:128) finished (TIME : 1 s and 18446744073709261920 us)
+Thread(id:58, group:0) started
+Thread(id:49, group:0, size:128) finished (TIME : 1 s and 18446744073709325163 us)
+Thread(id:57, group:0) started
+Thread(id:51, group:0, size:128) finished (TIME : 1 s and 18446744073709348950 us)
+Thread(id:59, group:0) started
+Thread(id:54, group:0, size:128) finished (TIME : 1 s and 18446744073709359109 us)
+Thread(id:62, group:0) started
+Thread(id:52, group:0, size:128) finished (TIME : 1 s and 18446744073709364463 us)
+Thread(id:60, group:0) started
+Thread(id:48, group:0, size:128) finished (TIME : 1 s and 18446744073709378437 us)
+Thread(id:56, group:0) started
+Thread(id:63, group:0, size:256) finished (TIME : 1 s and 18446744073709472646 us)
+Thread(id:71, group:0) started
+Thread(id:71, group:0, size:32) finished (TIME : 1 s and 18446744073709476050 us)
+Thread(id:79, group:0) started
+Thread(id:79, group:0, size:64) finished (TIME : 1 s and 18446744073709483129 us)
+Thread(id:87, group:0) started
+ ksched_priority called!!!
+ CPU: 0, UThread ID: 95, State: 1, Priority: 16, credit: 75
+ CPU: 0, UThread ID: 103, State: 1, Priority: 16, credit: 100
+ CPU: 0, UThread ID: 111, State: 1, Priority: 16, credit: 100
+ CPU: 0, UThread ID: 119, State: 1, Priority: 16, credit: 100
+ CPU: 0, UThread ID: 127, State: 1, Priority: 16, credit: 100
+ CPU: 1, UThread ID: 64, State: 1, Priority: 16, credit: 75
+ CPU: 2, UThread ID: 65, State: 1, Priority: 16, credit: 75
+ CPU: 5, UThread ID: 68, State: 1, Priority: 16, credit: 75
+ CPU: 1, UThread ID: 72, State: 1, Priority: 16, credit: 75
+ CPU: 2, UThread ID: 73, State: 1, Priority: 16, credit: 75
+ CPU: 5, UThread ID: 76, State: 1, Priority: 16, credit: 75
+ CPU: 1, UThread ID: 80, State: 1, Priority: 16, credit: 75
+ CPU: 2, UThread ID: 81, State: 1, Priority: 16, credit: 75
+ CPU: 5, UThread ID: 84, State: 1, Priority: 16, credit: 75
+ CPU: 1, UThread ID: 88, State: 1, Priority: 16, credit: 75
+ CPU: 2, UThread ID: 89, State: 1, Priority: 16, credit: 75
+ CPU: 5, UThread ID: 92, State: 1, Priority: 16, credit: 75
+ CPU: 1, UThread ID: 96, State: 1, Priority: 16, credit: 100
+ CPU: 2, UThread ID: 97, State: 1, Priority: 16, credit: 100
+ CPU: 5, UThread ID: 100, State: 1, Priority: 16, credit: 100
+ CPU: 1, UThread ID: 104, State: 1, Priority: 16, credit: 100
+ CPU: 2, UThread ID: 105, State: 1, Priority: 16, credit: 100
+ CPU: 5, UThread ID: 108, State: 1, Priority: 16, credit: 100
+ CPU: 1, UThread ID: 112, State: 1, Priority: 16, credit: 100
+ CPU: 2, UThread ID: 113, State: 1, Priority: 16, credit: 100
+ CPU: 5, UThread ID: 116, State: 1, Priority: 16, credit: 100
+ CPU: 1, UThread ID: 120, State: 1, Priority: 16, credit: 100
+ CPU: 2, UThread ID: 121, State: 1, Priority: 16, credit: 100
+ CPU: 5, UThread ID: 124, State: 1, Priority: 16, credit: 100
+Thread(id:56, group:0, cpu:1) used_credit: 152
+Thread(id:57, group:0, cpu:2) used_credit: 205
+Thread(id:60, group:0, cpu:5) used_credit: 166
+Thread(id:56, group:0, cpu:1) priority changed. credit:-102
+Thread(id:57, group:0, cpu:2) priority changed. credit:-155
+Thread(id:60, group:0, cpu:5) priority changed. credit:-116
+Thread(id:64, group:0) started
+Thread(id:65, group:0) started
+Thread(id:68, group:0) started
+Thread(id:87, group:0, cpu:0) used_credit: 47
+ CPU: 4, UThread ID: 67, State: 1, Priority: 16, credit: 75
+ CPU: 4, UThread ID: 75, State: 1, Priority: 16, credit: 75
+ CPU: 4, UThread ID: 83, State: 1, Priority: 16, credit: 75
+ CPU: 4, UThread ID: 91, State: 1, Priority: 16, credit: 75
+ CPU: 4, UThread ID: 99, State: 1, Priority: 16, credit: 100
+ CPU: 4, UThread ID: 107, State: 1, Priority: 16, credit: 100
+ CPU: 4, UThread ID: 115, State: 1, Priority: 16, credit: 100
+ CPU: 4, UThread ID: 123, State: 1, Priority: 16, credit: 100
+Thread(id:59, group:0, cpu:4) used_credit: 193
+Thread(id:59, group:0, cpu:4) priority changed. credit:-143
+ CPU: 7, UThread ID: 70, State: 1, Priority: 16, credit: 75
+ CPU: 7, UThread ID: 78, State: 1, Priority: 16, credit: 75
+ CPU: 7, UThread ID: 86, State: 1, Priority: 16, credit: 75
+ CPU: 7, UThread ID: 94, State: 1, Priority: 16, credit: 75
+ CPU: 7, UThread ID: 102, State: 1, Priority: 16, credit: 100
+ CPU: 7, UThread ID: 110, State: 1, Priority: 16, credit: 100
+ CPU: 7, UThread ID: 118, State: 1, Priority: 16, credit: 100
+ CPU: 7, UThread ID: 126, State: 1, Priority: 16, credit: 100
+Thread(id:62, group:0, cpu:7) used_credit: 194
+Thread(id:62, group:0, cpu:7) priority changed. credit:-144
+ CPU: 6, UThread ID: 69, State: 1, Priority: 16, credit: 75
+ CPU: 6, UThread ID: 77, State: 1, Priority: 16, credit: 75
+ CPU: 6, UThread ID: 85, State: 1, Priority: 16, credit: 75
+ CPU: 6, UThread ID: 93, State: 1, Priority: 16, credit: 75
+ CPU: 6, UThread ID: 101, State: 1, Priority: 16, credit: 100
+ CPU: 6, UThread ID: 109, State: 1, Priority: 16, credit: 100
+ CPU: 6, UThread ID: 117, State: 1, Priority: 16, credit: 100
+ CPU: 6, UThread ID: 125, State: 1, Priority: 16, credit: 100
+Thread(id:61, group:0, cpu:6) used_credit: 307
+Thread(id:61, group:0, cpu:6) priority changed. credit:-257
+ CPU: 3, UThread ID: 66, State: 1, Priority: 16, credit: 75
+ CPU: 3, UThread ID: 74, State: 1, Priority: 16, credit: 75
+ CPU: 3, UThread ID: 82, State: 1, Priority: 16, credit: 75
+ CPU: 3, UThread ID: 90, State: 1, Priority: 16, credit: 75
+Thread(id:67, group:0) started
+ CPU: 3, UThread ID: 98, State: 1, Priority: 16, credit: 100
+ CPU: 3, UThread ID: 106, State: 1, Priority: 16, credit: 100
+ CPU: 3, UThread ID: 114, State: 1, Priority: 16, credit: 100
+ CPU: 3, UThread ID: 122, State: 1, Priority: 16, credit: 100
+Thread(id:58, group:0, cpu:3) used_credit: 310
+Thread(id:58, group:0, cpu:3) priority changed. credit:-260
+Thread(id:69, group:0) started
+Thread(id:70, group:0) started
+Thread(id:66, group:0) started
+Thread(id:95, group:0) started
+Thread(id:64, group:0, size:32) finished (TIME : 1 s and 47515 us)
+Thread(id:72, group:0) started
+Thread(id:66, group:0, size:32) finished (TIME : 1 s and 59389 us)
+Thread(id:74, group:0) started
+Thread(id:67, group:0, size:32) finished (TIME : 1 s and 60936 us)
+Thread(id:75, group:0) started
+Thread(id:70, group:0, size:32) finished (TIME : 1 s and 102904 us)
+Thread(id:78, group:0) started
+Thread(id:72, group:0, size:64) finished (TIME : 1 s and 104577 us)
+Thread(id:80, group:0) started
+Thread(id:78, group:0, size:64) finished (TIME : 1 s and 106960 us)
+Thread(id:65, group:0, size:32) finished (TIME : 1 s and 122806 us)
+Thread(id:69, group:0, size:32) finished (TIME : 1 s and 127189 us)
+Thread(id:86, group:0) started
