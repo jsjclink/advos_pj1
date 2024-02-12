@@ -154,7 +154,9 @@ int main()
 				uarg->mat_size = mat_sizes[msi];
 				uarg->tid = inx;
 				uarg->gid = 0;
-				uarg->assigned_credit = credit_groups[cdi];
+				
+				uarg->assigned_credit = 100000000;
+				// uarg->assigned_credit = credit_groups[cdi];
 
 				uthread_create(&utids[inx], uthread_mulmat, uarg, uarg->gid, uarg->assigned_credit);
 			}
