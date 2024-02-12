@@ -228,26 +228,24 @@ static void ksched_cosched(int signal)
 
 	TAILQ_FOREACH (u_thread, uhead_prio_under, uthread_runq)
 	{
-		if(cur_k_ctx->timer_count % 3 == 0){
-			fprintf(stderr, "\n CPU: %d, UThread ID: %d credit increased.", cur_k_ctx->cpuid, u_thread->uthread_tid);
-			if(u_thread->credit == 0){
-				u_thread->credit += 30;
-			}
-		}
 		fprintf(stderr, "\n CPU: %d, UThread ID: %d, State: %d, Priority: %d, credit: %d",
 			cur_k_ctx->cpuid, u_thread->uthread_tid, u_thread->uthread_state, u_thread->uthread_priority, u_thread->credit);
+		if(cur_k_ctx->timer_count % 3 == 0){
+			fprintf(stderr, "\n CPU: %d, UThread ID: %d credit increased.", cur_k_ctx->cpuid, u_thread->uthread_tid);
+			u_thread->credit += 30;
+		}
+		
 	}
 
 	TAILQ_FOREACH (u_thread, uhead_prio_over, uthread_runq)
 	{
-		if(cur_k_ctx->timer_count % 3 == 0){
-			fprintf(stderr, "\n CPU: %d, UThread ID: %d credit increased.", cur_k_ctx->cpuid, u_thread->uthread_tid);
-			if(u_thread->credit == 0){
-				u_thread->credit += 30;
-			}
-		}
 		fprintf(stderr, "\n CPU: %d, UThread ID: %d, State: %d, Priority: %d, credit: %d",
 			cur_k_ctx->cpuid, u_thread->uthread_tid, u_thread->uthread_state, u_thread->uthread_priority, u_thread->credit);
+		if(cur_k_ctx->timer_count % 3 == 0){
+			fprintf(stderr, "\n CPU: %d, UThread ID: %d credit increased.", cur_k_ctx->cpuid, u_thread->uthread_tid);
+			u_thread->credit += 30;
+			u_thread->uthread_priority = UNDER_PRIORITY;
+		}
 	}
 
 
@@ -302,26 +300,24 @@ static void ksched_priority(int signo)
 
 	TAILQ_FOREACH (u_thread, uhead_prio_under, uthread_runq)
 	{
-		if(cur_k_ctx->timer_count % 3 == 0){
-			fprintf(stderr, "\n CPU: %d, UThread ID: %d credit increased.", cur_k_ctx->cpuid, u_thread->uthread_tid);
-			if(u_thread->credit == 0){
-				u_thread->credit += 30;
-			}
-		}
 		fprintf(stderr, "\n CPU: %d, UThread ID: %d, State: %d, Priority: %d, credit: %d",
 			cur_k_ctx->cpuid, u_thread->uthread_tid, u_thread->uthread_state, u_thread->uthread_priority, u_thread->credit);
+		if(cur_k_ctx->timer_count % 3 == 0){
+			fprintf(stderr, "\n CPU: %d, UThread ID: %d credit increased.", cur_k_ctx->cpuid, u_thread->uthread_tid);
+			u_thread->credit += 30;
+		}
+		
 	}
 
 	TAILQ_FOREACH (u_thread, uhead_prio_over, uthread_runq)
 	{
-		if(cur_k_ctx->timer_count % 3 == 0){
-			fprintf(stderr, "\n CPU: %d, UThread ID: %d credit increased.", cur_k_ctx->cpuid, u_thread->uthread_tid);
-			if(u_thread->credit == 0){
-				u_thread->credit += 30;
-			}
-		}
 		fprintf(stderr, "\n CPU: %d, UThread ID: %d, State: %d, Priority: %d, credit: %d",
 			cur_k_ctx->cpuid, u_thread->uthread_tid, u_thread->uthread_state, u_thread->uthread_priority, u_thread->credit);
+		if(cur_k_ctx->timer_count % 3 == 0){
+			fprintf(stderr, "\n CPU: %d, UThread ID: %d credit increased.", cur_k_ctx->cpuid, u_thread->uthread_tid);
+			u_thread->credit += 30;
+			u_thread->uthread_priority = UNDER_PRIORITY;
+		}
 	}
 
 	/* Relay the signal to all other virtual processors(kthreads) */
