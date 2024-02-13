@@ -144,8 +144,6 @@ extern void uthread_schedule(uthread_struct_t * (*kthread_best_sched_uthread)(kt
 			fprintf(stderr, "\nUThread(id:%d, group:%d, cpu:%d) finished. cpu_time: %ld, wait_time: %ld", 
 				u_obj->uthread_tid, u_obj->uthread_gid, u_obj->cpu_id, u_obj->cpu_time, u_obj->wait_time);
 
-
-
 			/* XXX: Inserting uthread into zombie queue is causing improper
 			 * cleanup/exit of uthread (core dump) */
 			uthread_head_t * kthread_zhead = &(kthread_runq->zombie_uthreads);
@@ -189,7 +187,7 @@ extern void uthread_schedule(uthread_struct_t * (*kthread_best_sched_uthread)(kt
 			add_to_runqueue(kthread_runq->active_runq, &(kthread_runq->kthread_runqlock), u_obj);
 			
 			//print thread runqueue
-			print_queue(k_ctx);
+			// print_queue(k_ctx);
 
 			/* XXX: Save the context (signal mask not saved) */
 			if(sigsetjmp(u_obj->uthread_env, 0))
@@ -234,9 +232,6 @@ extern void uthread_schedule(uthread_struct_t * (*kthread_best_sched_uthread)(kt
 
 	u_obj->wait_time += wait_time_ms;
 	// fprintf(stderr, "\nwait_time: %ld", wait_time_ms);
-	
-
-
 	
 	/* Jump to the selected uthread context */
 	siglongjmp(u_obj->uthread_env, 1);

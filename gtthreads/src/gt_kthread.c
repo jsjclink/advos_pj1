@@ -322,6 +322,7 @@ static void ksched_priority(int signo)
 			u_thread->uthread_priority = UNDER_PRIORITY;
 		}
 	}
+	load_balance(cur_k_ctx);
 
 	/* Relay the signal to all other virtual processors(kthreads) */
 	for(inx=0; inx<GT_MAX_KTHREADS; inx++)
@@ -332,11 +333,11 @@ static void ksched_priority(int signo)
 		{
 			if(tmp_k_ctx->kthread_flags & KTHREAD_DONE)
 				continue;
+			load_balance(cur_k_ctx);
 			/* tkill : send signal to specific threads */
 			syscall(__NR_tkill, tmp_k_ctx->tid, SIGUSR1);
 		}
 	}
-
 	uthread_schedule(&sched_find_best_uthread);
 
 	// kthread_unblock_signal(SIGVTALRM);
@@ -497,7 +498,89 @@ void print_queue(kthread_context_t *cur_k_ctx){
 	{
 		fprintf(stderr, "[uthread_id: %d]", u_thread->uthread_tid);		
 	}
+}
 
+int runqueue_is_empty(kthread_runqueue_t *kthread_runqueue){
+	uthread_struct_t *u_thread;
+
+	uthread_head_t *uhead_prio_under;
+	uthread_head_t *uhead_prio_over;
+
+	uhead_prio_under = &kthread_runqueue->active_runq->prio_array[UNDER_PRIORITY].group[0];
+	uhead_prio_over = &kthread_runqueue->active_runq->prio_array[OVER_PRIORITY].group[0];
+
+	if(TAILQ_EMPTY(uhead_prio_under) && TAILQ_EMPTY(uhead_prio_over)){
+		return 1;
+	} 
+
+	return 0;
+}
+
+uthread_struct_t* find_stealable_tail_elem(kthread_runqueue_t *kthread_runqueue){
+	int cnt = 0;
+	uthread_struct_t* ret_uthread;
+
+	uthread_struct_t *u_thread;
+
+	uthread_head_t *uhead_prio_under;
+	uthread_head_t *uhead_prio_over;
+	
+	uhead_prio_under = &kthread_runqueue->active_runq->prio_array[UNDER_PRIORITY].group[0];
+	uhead_prio_over = &kthread_runqueue->active_runq->prio_array[OVER_PRIORITY].group[0];
+
+	TAILQ_FOREACH (u_thread, uhead_prio_under, uthread_runq)
+	{
+		ret_uthread = u_thread;
+		cnt++;
+	}
+	TAILQ_FOREACH (u_thread, uhead_prio_over, uthread_runq)
+	{
+		ret_uthread = u_thread;
+		cnt++;
+	}
+	
+	if(cnt > 5 && ret_uthread->uthread_state == UTHREAD_RUNNABLE && ret_uthread != kthread_runqueue->cur_uthread){
+		return ret_uthread;
+	}
+
+	return NULL;
+}
+
+void load_balance(kthread_context_t *k_ctx){
+	kthread_block_signal(SIGVTALRM);
+
+	if(runqueue_is_empty(&(k_ctx->krunqueue))){
+		fprintf(stderr, "\n[LOAD_BALANCING]");
+		kthread_context_t *tmp_k_ctx;
+		// print_queue(k_ctx);	
+		
+		gt_spin_lock(&k_ctx->krunqueue.kthread_runqlock);
+		for(int i = 0; i < GT_MAX_KTHREADS; i++){
+			if((tmp_k_ctx = kthread_cpu_map[i]) && (tmp_k_ctx != k_ctx)){
+				if(tmp_k_ctx->kthread_flags & KTHREAD_DONE)
+					continue;
+				
+				gt_spin_lock(&tmp_k_ctx->krunqueue.kthread_runqlock);
+				
+				uthread_struct_t* stealable_uthread = find_stealable_tail_elem(&(tmp_k_ctx->krunqueue));
+				if(stealable_uthread){
+					my_switch_runqueue(&tmp_k_ctx->krunqueue, &k_ctx->krunqueue, stealable_uthread);
+					
+					gt_spin_unlock(&tmp_k_ctx->krunqueue.kthread_runqlock);
+
+					fprintf(stderr, "\n[LOAD_BALANCING SUCCESS]");
+					break;
+				} else {
+					gt_spin_unlock(&tmp_k_ctx->krunqueue.kthread_runqlock);
+					
+				}
+			}
+		}
+		// print_queue(k_ctx);
+		gt_spin_unlock(&k_ctx->krunqueue.kthread_runqlock);
+	}
+
+	kthread_unblock_signal(SIGVTALRM);
 }
 
 
