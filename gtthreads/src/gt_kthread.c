@@ -527,7 +527,7 @@ uthread_struct_t* find_stealable_tail_elem(kthread_runqueue_t *kthread_runqueue)
 		ret_uthread = u_thread;
 	}
 	
-	if(kthread_runqueue->active_runq->uthread_tot > 10000000 && ret_uthread != kthread_runqueue->cur_uthread){
+	if(kthread_runqueue->active_runq->uthread_tot > 10 && ret_uthread != kthread_runqueue->cur_uthread){
 		return ret_uthread;
 	}
 
