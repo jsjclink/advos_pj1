@@ -132,15 +132,35 @@ extern void switch_runqueue(runqueue_t *from_runq, gt_spinlock_t *from_runqlock,
 extern void my_switch_runqueue(runqueue_t *from_runq, runqueue_t *to_runq, uthread_struct_t *u_elem){
 	fprintf(stderr, "\n[LOAD_BALANCING 222222]");
 	__rem_from_runqueue(from_runq, u_elem);
-	fprintf(stderr, "\n[LOAD_BALANCING 333333]");
-	assert(from_runq != NULL);
-	assert(u_elem != NULL);
-	uthread_head_t *uhead = &from_runq->prio_array[u_elem->uthread_priority].group[u_elem->uthread_gid];
-	assert(uhead != NULL);
-	assert(0);
-	assert(1);
 
-	__add_to_runqueue(to_runq, u_elem);	
+
+	unsigned int uprio, ugroup;
+	uthread_head_t *uhead;
+
+	/* Find a position in the runq based on priority and group.
+	 * Update the masks. */
+	uprio = u_elem->uthread_priority;
+	ugroup = u_elem->uthread_gid;
+
+	/* Insert at the tail */
+	uhead = &to_runq->prio_array[uprio].group[ugroup];
+	TAILQ_INSERT_HEAD(uhead, u_elem, uthread_runq);
+
+	/* Update information */
+	if(!IS_BIT_SET(to_runq->prio_array[uprio].group_mask, ugroup))
+		SET_BIT(to_runq->prio_array[uprio].group_mask, ugroup);
+
+	to_runq->uthread_tot++;
+
+	to_runq->uthread_prio_tot[uprio]++;
+	if(!IS_BIT_SET(to_runq->uthread_mask, uprio))
+		SET_BIT(to_runq->uthread_mask, uprio);
+
+	to_runq->uthread_group_tot[ugroup]++;
+	if(!IS_BIT_SET(to_runq->uthread_group_mask[ugroup], uprio))
+		SET_BIT(to_runq->uthread_group_mask[ugroup], uprio);
+
+
 	fprintf(stderr, "\n[LOAD_BALANCING 444444]");
 	return;
 }
