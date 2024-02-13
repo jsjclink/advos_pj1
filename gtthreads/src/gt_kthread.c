@@ -551,14 +551,14 @@ void load_balance(kthread_context_t *k_ctx){
 				gt_spin_lock(&tmp_k_ctx->krunqueue.kthread_runqlock);
 			}
 		}
-		fprintf(stderr, "\n[LOAD_BALANCING START!!!]");
-
 		for(int i = 0; i < GT_MAX_KTHREADS; i++){
 			if((tmp_k_ctx = kthread_cpu_map[i]) && (tmp_k_ctx != k_ctx)){
 				if(tmp_k_ctx->kthread_flags & KTHREAD_DONE)
 					continue;
 				
 				uthread_struct_t* stealable_uthread = find_stealable_tail_elem(&(tmp_k_ctx->krunqueue));
+				fprintf(stderr, "\n[LOAD_BALANCING STEAL!!!!!]");
+
 				if(stealable_uthread){
 					my_switch_runqueue(&tmp_k_ctx->krunqueue.active_runq, &k_ctx->krunqueue.active_runq, stealable_uthread);
 					
