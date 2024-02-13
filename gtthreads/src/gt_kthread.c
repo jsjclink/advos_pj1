@@ -322,6 +322,7 @@ static void ksched_priority(int signo)
 			u_thread->uthread_priority = UNDER_PRIORITY;
 		}
 	}
+	load_balance(cur_k_ctx);
 
 	/* Relay the signal to all other virtual processors(kthreads) */
 	for(inx=0; inx<GT_MAX_KTHREADS; inx++)
@@ -332,6 +333,7 @@ static void ksched_priority(int signo)
 		{
 			if(tmp_k_ctx->kthread_flags & KTHREAD_DONE)
 				continue;
+			load_balance(cur_k_ctx);
 			/* tkill : send signal to specific threads */
 			syscall(__NR_tkill, tmp_k_ctx->tid, SIGUSR1);
 		}
@@ -537,7 +539,7 @@ uthread_struct_t* find_stealable_tail_elem(kthread_runqueue_t *kthread_runqueue)
 		cnt++;
 	}
 	
-	if(cnt > 2 && ret_uthread != kthread_runqueue->cur_uthread){
+	if(cnt > 5 && ret_uthread != kthread_runqueue->cur_uthread){
 		return ret_uthread;
 	}
 
@@ -545,8 +547,9 @@ uthread_struct_t* find_stealable_tail_elem(kthread_runqueue_t *kthread_runqueue)
 }
 
 void load_balance(kthread_context_t *k_ctx){
+	fprintf(stderr, "\n[LOAD_BALANCING]");
 	if(runqueue_is_empty(&(k_ctx->krunqueue))){
-		fprintf(stderr, "\n[LOAD_BALANCING]");
+		fprintf(stderr, "\n[LOAD_BALANCING START]");
 		kthread_context_t *tmp_k_ctx;
 		// print_queue(k_ctx);	
 		
@@ -575,7 +578,6 @@ void load_balance(kthread_context_t *k_ctx){
 		// print_queue(k_ctx);
 		gt_spin_unlock(&k_ctx->krunqueue.kthread_runqlock);
 	}
-
 }
 
 
