@@ -218,6 +218,7 @@ extern uthread_struct_t *sched_find_best_uthread(kthread_runqueue_t *kthread_run
 	gt_spin_lock(&(kthread_runq->kthread_runqlock));
 
 	runq = kthread_runq->active_runq;
+	assert(runq != NULL);
 
 	kthread_runq->kthread_runqlock.holder = 0x04;
 	if(!(runq->uthread_mask))
