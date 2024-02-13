@@ -535,6 +535,9 @@ uthread_struct_t* find_stealable_tail_elem(kthread_runqueue_t *kthread_runqueue)
 }
 
 void load_balance(kthread_context_t *k_ctx){
+	ksched_shared_info_t *ksched_info = &ksched_shared_info;	
+	gt_spin_lock(&(ksched_info->load_balancing_lock));
+
 	if(k_ctx->krunqueue.active_runq->uthread_tot == 0){
 		fprintf(stderr, "\n[LOAD_BALANCING START]");
 		kthread_context_t *tmp_k_ctx;
@@ -582,6 +585,7 @@ void load_balance(kthread_context_t *k_ctx){
 		fprintf(stderr, "\n[LOAD_BALANCING END]");
 	}
 
+	gt_spin_unlock(&(ksched_info->load_balancing_lock));
 }
 
 
