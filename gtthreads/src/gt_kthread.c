@@ -556,7 +556,9 @@ void load_balance(kthread_context_t *k_ctx){
 				if(tmp_k_ctx->kthread_flags & KTHREAD_DONE)
 					continue;
 				
+				fprintf(stderr, "\n[LOAD_BALANCING 000000]");
 				uthread_struct_t* stealable_uthread = find_stealable_tail_elem(&(tmp_k_ctx->krunqueue));
+				fprintf(stderr, "\n[LOAD_BALANCING 111111]");
 				if(stealable_uthread){
 					my_switch_runqueue(&tmp_k_ctx->krunqueue.active_runq, &k_ctx->krunqueue.active_runq, stealable_uthread);
 					
