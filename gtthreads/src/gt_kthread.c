@@ -547,8 +547,6 @@ uthread_struct_t* find_stealable_tail_elem(kthread_runqueue_t *kthread_runqueue)
 }
 
 void load_balance(kthread_context_t *k_ctx){
-	kthread_block_signal(SIGVTALRM);
-
 	if(runqueue_is_empty(&(k_ctx->krunqueue))){
 		fprintf(stderr, "\n[LOAD_BALANCING]");
 		kthread_context_t *tmp_k_ctx;
@@ -580,7 +578,6 @@ void load_balance(kthread_context_t *k_ctx){
 		gt_spin_unlock(&k_ctx->krunqueue.kthread_runqlock);
 	}
 
-	kthread_unblock_signal(SIGVTALRM);
 }
 
 
