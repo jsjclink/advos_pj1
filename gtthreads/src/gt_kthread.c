@@ -227,6 +227,8 @@ static void ksched_cosched(int signal)
 	uthread_head_t *uhead_prio_under;
 	uthread_head_t *uhead_prio_over;
 
+	gt_spin_lock(&cur_k_ctx->krunqueue.kthread_runqlock);
+
 	uhead_prio_under = &cur_k_ctx->krunqueue.active_runq->prio_array[UNDER_PRIORITY].group[0];
 	uhead_prio_over = &cur_k_ctx->krunqueue.active_runq->prio_array[OVER_PRIORITY].group[0];
 
@@ -251,6 +253,8 @@ static void ksched_cosched(int signal)
 			u_thread->uthread_priority = UNDER_PRIORITY;
 		}
 	}
+
+	gt_spin_unlock(&cur_k_ctx->krunqueue.kthread_runqlock);
 
 
 #ifdef CO_SCHED
@@ -299,6 +303,8 @@ static void ksched_priority(int signo)
 	uthread_head_t *uhead_prio_under;
 	uthread_head_t *uhead_prio_over;
 
+	gt_spin_lock(&cur_k_ctx->krunqueue.kthread_runqlock);
+
 	uhead_prio_under = &cur_k_ctx->krunqueue.active_runq->prio_array[UNDER_PRIORITY].group[0];
 	uhead_prio_over = &cur_k_ctx->krunqueue.active_runq->prio_array[OVER_PRIORITY].group[0];
 
@@ -323,6 +329,8 @@ static void ksched_priority(int signo)
 			u_thread->uthread_priority = UNDER_PRIORITY;
 		}
 	}
+
+	gt_spin_unlock(&cur_k_ctx->krunqueue.kthread_runqlock);
 
 	/* Relay the signal to all other virtual processors(kthreads) */
 	for(inx=0; inx<GT_MAX_KTHREADS; inx++)
