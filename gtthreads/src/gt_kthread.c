@@ -538,7 +538,7 @@ uthread_struct_t* find_stealable_tail_elem(kthread_runqueue_t *kthread_runqueue)
 		cnt++;
 	}
 	
-	if(cnt > 1000 && ret_uthread != kthread_runqueue->cur_uthread){
+	if(cnt > 20000 && ret_uthread != kthread_runqueue->cur_uthread){
 		return ret_uthread;
 	}
 
@@ -546,39 +546,41 @@ uthread_struct_t* find_stealable_tail_elem(kthread_runqueue_t *kthread_runqueue)
 }
 
 void load_balance(kthread_context_t *k_ctx){
-	// ksched_shared_info_t *ksched_info = &ksched_shared_info;	
-	// gt_spin_lock(&(ksched_info->load_balancing_lock));
+	ksched_shared_info_t *ksched_info = &ksched_shared_info;	
+	gt_spin_lock(&(ksched_info->load_balancing_lock));
+
 	if(runqueue_is_empty(&(k_ctx->krunqueue))){
 		fprintf(stderr, "\n[LOAD_BALANCING START]");
 		kthread_context_t *tmp_k_ctx;
 		// print_queue(k_ctx);	
 		
 		gt_spin_lock(&k_ctx->krunqueue.kthread_runqlock);
+
 		for(int i = 0; i < GT_MAX_KTHREADS; i++){
 			if((tmp_k_ctx = kthread_cpu_map[i]) && (tmp_k_ctx != k_ctx)){
 				if(tmp_k_ctx->kthread_flags & KTHREAD_DONE)
 					continue;
 				
 				gt_spin_lock(&tmp_k_ctx->krunqueue.kthread_runqlock);
-				
 				uthread_struct_t* stealable_uthread = find_stealable_tail_elem(&(tmp_k_ctx->krunqueue));
 				if(stealable_uthread){
-					my_switch_runqueue(&tmp_k_ctx->krunqueue, &k_ctx->krunqueue, stealable_uthread);
+					my_switch_runqueue(&tmp_k_ctx->krunqueue.active_runq, &k_ctx->krunqueue.active_runq, stealable_uthread);
 					
 					gt_spin_unlock(&tmp_k_ctx->krunqueue.kthread_runqlock);
-
 					fprintf(stderr, "\n[LOAD_BALANCING SUCCESS]");
 					break;
 				} else {
 					gt_spin_unlock(&tmp_k_ctx->krunqueue.kthread_runqlock);
-					
 				}
 			}
 		}
-		// print_queue(k_ctx);
+
 		gt_spin_unlock(&k_ctx->krunqueue.kthread_runqlock);
+		// print_queue(k_ctx);
+		fprintf(stderr, "\n[LOAD_BALANCING END]");
 	}
-	// gt_spin_unlock(&(ksched_info->load_balancing_lock));
+
+	gt_spin_unlock(&(ksched_info->load_balancing_lock));
 }
 
 

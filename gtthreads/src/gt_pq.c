@@ -131,7 +131,7 @@ extern void switch_runqueue(runqueue_t *from_runq, gt_spinlock_t *from_runqlock,
 
 extern void my_switch_runqueue(runqueue_t *from_runq, runqueue_t *to_runq, uthread_struct_t *u_elem){
 	__rem_from_runqueue(from_runq, u_elem);
-	__add_to_runqueue(to_runq, u_elem);
+	__add_to_runqueue(to_runq, u_elem);	
 	return;
 }
 
