@@ -132,6 +132,10 @@ extern void switch_runqueue(runqueue_t *from_runq, gt_spinlock_t *from_runqlock,
 extern void my_switch_runqueue(runqueue_t *from_runq, runqueue_t *to_runq, uthread_struct_t *u_elem){
 	assert(from_runq != NULL);
 	assert(u_elem != NULL);
+	fprintf(stderr, "\n from_runq");
+	uthread_head_t *uhead = &from_runq->prio_array[u_elem->uthread_priority].group[u_elem->uthread_gid];
+	assert(uhead != NULL);
+
 
 	fprintf(stderr, "\n[LOAD_BALANCING 222222]");
 	__rem_from_runqueue(from_runq, u_elem);
