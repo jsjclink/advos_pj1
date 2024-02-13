@@ -158,6 +158,8 @@ extern void uthread_schedule(uthread_struct_t * (*kthread_best_sched_uthread)(kt
 				ksched_info->kthread_cur_uthreads--;
 				gt_spin_unlock(&ksched_info->ksched_lock);
 			}
+			
+			load_balance(k_ctx);
 		}
 		else
 		{
