@@ -78,7 +78,7 @@ static void * uthread_mulmat(void *p)
 			for(int k = 0; k < ptr->mat_size; k++){
 				C.m[i][j] += (A.m[i][k]) * (B.m[k][j]);
 
-				if(ptr->tid % 3 == 0 && i % 16 == 0 && j % 16 == 0 && k == 0){
+				if(ptr->tid % 7 == 0 && i == 0 && j == 0 && k == 0){
 					uthread_yield();
 				}
 				// if(ptr->tid == 79 && i == 16 && j == 16 && k == 16){
