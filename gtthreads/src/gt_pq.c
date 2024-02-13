@@ -185,10 +185,6 @@ extern uthread_struct_t *sched_find_best_uthread(kthread_runqueue_t *kthread_run
 	uthread_struct_t *u_obj;
 	unsigned int uprio, ugroup;
 
-	ksched_shared_info_t *ksched_info = &ksched_shared_info;	
-	gt_spin_lock(&(ksched_info->load_balancing_lock));
-
-
 	gt_spin_lock(&(kthread_runq->kthread_runqlock));
 
 	runq = kthread_runq->active_runq;
@@ -205,8 +201,6 @@ extern uthread_struct_t *sched_find_best_uthread(kthread_runqueue_t *kthread_run
 		{
 			assert(!runq->uthread_tot);
 			gt_spin_unlock(&(kthread_runq->kthread_runqlock));
-			gt_spin_unlock(&(ksched_info->load_balancing_lock));
-
 			return NULL;
 		}
 	}
@@ -223,8 +217,6 @@ extern uthread_struct_t *sched_find_best_uthread(kthread_runqueue_t *kthread_run
 	__rem_from_runqueue(runq, u_obj);
 
 	gt_spin_unlock(&(kthread_runq->kthread_runqlock));
-	gt_spin_unlock(&(ksched_info->load_balancing_lock));
-
 #if 0
 	printf("cpu(%d) : sched best uthread(id:%d, group:%d)\n", u_obj->cpu_id, u_obj->uthread_tid, u_obj->uthread_gid);
 #endif

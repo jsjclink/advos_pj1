@@ -546,7 +546,7 @@ uthread_struct_t* find_stealable_tail_elem(kthread_runqueue_t *kthread_runqueue)
 		cnt++;
 	}
 	
-	if(cnt > 2 && ret_uthread != kthread_runqueue->cur_uthread){
+	if(cnt > 5 && ret_uthread != kthread_runqueue->cur_uthread){
 		return ret_uthread;
 	}
 
