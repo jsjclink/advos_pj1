@@ -322,7 +322,6 @@ static void ksched_priority(int signo)
 			u_thread->uthread_priority = UNDER_PRIORITY;
 		}
 	}
-	load_balance(cur_k_ctx);
 
 	/* Relay the signal to all other virtual processors(kthreads) */
 	for(inx=0; inx<GT_MAX_KTHREADS; inx++)
@@ -333,7 +332,6 @@ static void ksched_priority(int signo)
 		{
 			if(tmp_k_ctx->kthread_flags & KTHREAD_DONE)
 				continue;
-			load_balance(cur_k_ctx);
 			/* tkill : send signal to specific threads */
 			syscall(__NR_tkill, tmp_k_ctx->tid, SIGUSR1);
 		}
