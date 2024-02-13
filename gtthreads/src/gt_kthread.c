@@ -561,7 +561,7 @@ void load_balance(kthread_context_t *k_ctx){
 	if(runqueue_is_empty(&(k_ctx->krunqueue))){
 		fprintf(stderr, "\n[LOAD_BALANCING START]");
 		kthread_context_t *tmp_k_ctx;
-		print_queue(k_ctx);	
+		// print_queue(k_ctx);	
 		
 		gt_spin_lock(&k_ctx->krunqueue.kthread_runqlock);
 		for(int i = 0; i < GT_MAX_KTHREADS; i++){
@@ -585,7 +585,7 @@ void load_balance(kthread_context_t *k_ctx){
 				}
 			}
 		}
-		print_queue(k_ctx);
+		// print_queue(k_ctx);
 		gt_spin_unlock(&k_ctx->krunqueue.kthread_runqlock);
 	}
 }
