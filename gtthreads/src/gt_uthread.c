@@ -186,7 +186,7 @@ extern void uthread_schedule(uthread_struct_t * (*kthread_best_sched_uthread)(kt
 			u_obj->curr_wait_time = end_time;
 			
 			u_obj->uthread_state = UTHREAD_RUNNABLE;
-			add_to_runqueue(kthread_runq->expires_runq, &(kthread_runq->kthread_runqlock), u_obj);
+			add_to_runqueue(kthread_runq->active_runq, &(kthread_runq->kthread_runqlock), u_obj);
 			
 			//print thread runqueue
 			// print_queue(k_ctx);

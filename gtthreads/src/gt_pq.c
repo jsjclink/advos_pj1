@@ -217,18 +217,10 @@ extern uthread_struct_t *sched_find_best_uthread(kthread_runqueue_t *kthread_run
 
 	gt_spin_lock(&(kthread_runq->kthread_runqlock));
 
-	runq = kthread_runq->active_runq;
-	assert(runq != NULL);
-	int a = runq->uthread_mask;
-
 	kthread_runq->kthread_runqlock.holder = 0x04;
 	if(!(runq->uthread_mask))
 	{ /* No jobs in active. switch runqueue */
 		assert(!runq->uthread_tot);
-		kthread_runq->active_runq = kthread_runq->expires_runq;
-		kthread_runq->expires_runq = runq;
-
-		runq = kthread_runq->expires_runq;
 		if(!runq->uthread_mask)
 		{
 			assert(!runq->uthread_tot);
