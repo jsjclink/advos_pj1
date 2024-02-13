@@ -548,7 +548,12 @@ void load_balance(kthread_context_t *k_ctx){
 				if(tmp_k_ctx->kthread_flags & KTHREAD_DONE)
 					continue;
 				
-				gt_spin_lock(&tmp_k_ctx->krunqueue.kthread_runqlock);
+				gt_spin_lock(&(tmp_k_ctx->krunqueue.kthread_runqlock));
+				if(tmp_k_ctx != k_ctx){
+					tmp_k_ctx->krunqueue.kthread_runqlock.holder = 0x10;
+				} else {
+					tmp_k_ctx->krunqueue.kthread_runqlock.holder = 0x11;
+				}
 			}
 		}
 		for(int i = 0; i < GT_MAX_KTHREADS; i++){
