@@ -507,24 +507,7 @@ void print_queue(kthread_context_t *cur_k_ctx){
 	}
 }
 
-int runqueue_is_empty(kthread_runqueue_t *kthread_runqueue){
-	uthread_struct_t *u_thread;
-
-	uthread_head_t *uhead_prio_under;
-	uthread_head_t *uhead_prio_over;
-
-	uhead_prio_under = &kthread_runqueue->active_runq->prio_array[UNDER_PRIORITY].group[0];
-	uhead_prio_over = &kthread_runqueue->active_runq->prio_array[OVER_PRIORITY].group[0];
-
-	if(TAILQ_EMPTY(uhead_prio_under) && TAILQ_EMPTY(uhead_prio_over)){
-		return 1;
-	} 
-
-	return 0;
-}
-
 uthread_struct_t* find_stealable_tail_elem(kthread_runqueue_t *kthread_runqueue){
-	int cnt = 0;
 	uthread_struct_t* ret_uthread;
 
 	uthread_struct_t *u_thread;
@@ -538,15 +521,13 @@ uthread_struct_t* find_stealable_tail_elem(kthread_runqueue_t *kthread_runqueue)
 	TAILQ_FOREACH (u_thread, uhead_prio_under, uthread_runq)
 	{
 		ret_uthread = u_thread;
-		cnt++;
 	}
 	TAILQ_FOREACH (u_thread, uhead_prio_over, uthread_runq)
 	{
 		ret_uthread = u_thread;
-		cnt++;
 	}
 	
-	if(cnt > 5 && ret_uthread != kthread_runqueue->cur_uthread){
+	if(kthread_runqueue->active_runq->uthread_tot > 50000000 && ret_uthread != kthread_runqueue->cur_uthread){
 		return ret_uthread;
 	}
 
