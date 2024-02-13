@@ -322,6 +322,16 @@ static void ksched_priority(int signo)
 			u_thread->uthread_priority = UNDER_PRIORITY;
 		}
 	}
+
+	fprintf(stderr, "\n [RUNNING KTHREADS!!]");
+	for(inx=0; inx<GT_MAX_KTHREADS; inx++){
+		if((tmp_k_ctx = kthread_cpu_map[inx])){
+			if(tmp_k_ctx->kthread_flags & KTHREAD_DONE)
+				continue;
+			fprintf(stderr, "%d, ", tmp_k_ctx->tid);
+		}
+	}
+
 	load_balance(cur_k_ctx);
 
 	/* Relay the signal to all other virtual processors(kthreads) */
