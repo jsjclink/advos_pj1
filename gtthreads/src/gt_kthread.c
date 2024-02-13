@@ -551,6 +551,7 @@ void load_balance(kthread_context_t *k_ctx){
 				gt_spin_lock(&tmp_k_ctx->krunqueue.kthread_runqlock);
 			}
 		}
+		fprintf(stderr, "\n[LOAD_BALANCING START!!!]");
 
 		for(int i = 0; i < GT_MAX_KTHREADS; i++){
 			if((tmp_k_ctx = kthread_cpu_map[i]) && (tmp_k_ctx != k_ctx)){
